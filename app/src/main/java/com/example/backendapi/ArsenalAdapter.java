@@ -19,6 +19,12 @@ public class ArsenalAdapter extends RecyclerView.Adapter<ArsenalAdapter.ViewHold
     //melakukan pendataan yang dibutuhkan untuk adapter
     private Context context;
     private ArrayList<Arsenal> arsenals;
+    private OnClickListener listener;
+
+    public void setListener(OnClickListener listener) {
+        this.listener = listener;
+    }
+
     //jangan terlebih dahulu membuat constructur untuk arsenals
 
     public ArsenalAdapter(Context context) {
@@ -63,6 +69,15 @@ public class ArsenalAdapter extends RecyclerView.Adapter<ArsenalAdapter.ViewHold
             super(itemView);
             imageView = itemView.findViewById(R.id.imageView);
             tvName = itemView.findViewById(R.id.tv_name);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //lakukan pengkondisian
+                    if (listener != null){
+                        listener.aksiKlik(getAdapterPosition());
+                    }
+                }
+            });
         }
     }
 }

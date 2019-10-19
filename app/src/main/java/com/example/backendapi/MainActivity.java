@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.android.volley.Request;
@@ -48,6 +49,15 @@ public class MainActivity extends AppCompatActivity {
         rvArsenal.setLayoutManager(gl);
         rvArsenal.setAdapter(adapter);
         rvArsenal.addItemDecoration(divider);
+
+        adapter.setListener(new OnClickListener() {
+            @Override
+            public void aksiKlik(int position) {
+                //intent adalah sebuah niat
+                Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void populateData(){
@@ -55,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         // jika request berhasil, tampilkan ke dalam recyclerView via adapter
         RequestQueue queue = Volley.newRequestQueue(this);
 
-        String url = "https://www.thesportsdb.com/api/v1/json/1/searchplayers.php?t=Swansea";
+        String url = "https://www.thesportsdb.com/api/v1/json/1/searchplayers.php?t=Liverpool";
                     //StringRequest memiliki 4 value
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
