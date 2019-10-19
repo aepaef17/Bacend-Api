@@ -55,7 +55,10 @@ public class MainActivity extends AppCompatActivity {
             public void aksiKlik(int position) {
                 //intent adalah sebuah niat
                 Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+                //memilih player berdasarkan id playernya untuk nantinya menampilkan detail activity
+                intent.putExtra("idPlayer",arsenals.get(position).getIdPlayer());
                 startActivity(intent);
+
             }
         });
     }
