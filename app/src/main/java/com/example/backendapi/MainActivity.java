@@ -2,8 +2,10 @@ package com.example.backendapi;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.os.Bundle;
 
@@ -37,8 +39,13 @@ public class MainActivity extends AppCompatActivity {
         populateData();
 
         LinearLayoutManager lm = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        DividerItemDecoration divider = new DividerItemDecoration(this,lm.getOrientation());
-        rvArsenal.setLayoutManager(lm);
+
+        GridLayoutManager gl = new GridLayoutManager(this,2);
+
+        StaggeredGridLayoutManager sg = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
+
+        DividerItemDecoration divider = new DividerItemDecoration(this,gl.getOrientation());
+        rvArsenal.setLayoutManager(gl);
         rvArsenal.setAdapter(adapter);
         rvArsenal.addItemDecoration(divider);
     }
@@ -48,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         // jika request berhasil, tampilkan ke dalam recyclerView via adapter
         RequestQueue queue = Volley.newRequestQueue(this);
 
-        String url = "https://www.thesportsdb.com/api/v1/json/1/searchplayers.php?t=Arsenal";
+        String url = "https://www.thesportsdb.com/api/v1/json/1/searchplayers.php?t=Swansea";
                     //StringRequest memiliki 4 value
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
